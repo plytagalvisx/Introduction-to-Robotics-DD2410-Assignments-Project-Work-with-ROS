@@ -1,0 +1,2 @@
+set(pal_wifi_localization_msgs_MESSAGE_FILES "/home/milenavi/project_ws/src/assignment_5/pal_msgs/pal_wifi_localization_msgs/msg/WifiSignalList.msg;/home/milenavi/project_ws/src/assignment_5/pal_msgs/pal_wifi_localization_msgs/msg/WifiSignalMap.msg;/home/milenavi/project_ws/src/assignment_5/pal_msgs/pal_wifi_localization_msgs/msg/WifiSignal.msg")
+set(pal_wifi_localization_msgs_SERVICE_FILES "/home/milenavi/project_ws/src/assignment_5/pal_msgs/pal_wifi_localization_msgs/srv/GetWifiMap.srv")

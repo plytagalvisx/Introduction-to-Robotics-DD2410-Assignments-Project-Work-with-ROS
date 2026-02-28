@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: actuator_state_controller
+Description: Description of actuator_state_controller
+Version: 0.4.9
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/ros_controllers/actuator_state_controller/include
+Libs: -L${prefix}/lib 
+Requires: 

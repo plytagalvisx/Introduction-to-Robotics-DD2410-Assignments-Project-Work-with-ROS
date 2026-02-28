@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: tts
+Description: Description of tts
+Version: 2.0.4
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

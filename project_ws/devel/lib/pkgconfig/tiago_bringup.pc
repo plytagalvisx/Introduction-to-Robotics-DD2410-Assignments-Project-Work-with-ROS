@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: tiago_bringup
+Description: Description of tiago_bringup
+Version: 2.3.12
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

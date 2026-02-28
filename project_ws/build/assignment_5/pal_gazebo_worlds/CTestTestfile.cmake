@@ -1,0 +1,8 @@
+# CMake generated Testfile for 
+# Source directory: /home/milenavi/project_ws/src/assignment_5/pal_gazebo_worlds
+# Build directory: /home/milenavi/project_ws/build/assignment_5/pal_gazebo_worlds
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(_ctest_pal_gazebo_worlds_rostest_test_run_gazebo_server.test "/home/milenavi/project_ws/build/catkin_generated/env_cached.sh" "/usr/bin/python3" "/opt/ros/noetic/share/catkin/cmake/test/run_tests.py" "/home/milenavi/project_ws/build/test_results/pal_gazebo_worlds/rostest-test_run_gazebo_server.xml" "--return-code" "/usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/home/milenavi/project_ws/src/assignment_5/pal_gazebo_worlds --package=pal_gazebo_worlds --results-filename test_run_gazebo_server.xml --results-base-dir \"/home/milenavi/project_ws/build/test_results\" /home/milenavi/project_ws/src/assignment_5/pal_gazebo_worlds/test/run_gazebo_server.test ")
+set_tests_properties(_ctest_pal_gazebo_worlds_rostest_test_run_gazebo_server.test PROPERTIES  _BACKTRACE_TRIPLES "/opt/ros/noetic/share/catkin/cmake/test/tests.cmake;160;add_test;/opt/ros/noetic/share/rostest/cmake/rostest-extras.cmake;52;catkin_run_tests_target;/opt/ros/noetic/share/rostest/cmake/rostest-extras.cmake;80;add_rostest;/opt/ros/noetic/share/rostest/cmake/rostest-extras.cmake;100;_add_rostest_google_test;/home/milenavi/project_ws/src/assignment_5/pal_gazebo_worlds/CMakeLists.txt;34;add_rostest_gtest;/home/milenavi/project_ws/src/assignment_5/pal_gazebo_worlds/CMakeLists.txt;0;")

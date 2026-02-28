@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: robotics_project
+Description: Description of robotics_project
+Version: 0.0.0
+Cflags: -I/home/milenavi/project_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

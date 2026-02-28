@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: position_controllers
+Description: Description of position_controllers
+Version: 0.4.9
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/ros_controllers/position_controllers/include
+Libs: -L${prefix}/lib -lposition_controllers
+Requires: controller_interface forward_command_controller

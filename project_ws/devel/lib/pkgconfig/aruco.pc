@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: aruco
+Description: Description of aruco
+Version: 3.1.3
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/aruco_ros/aruco/include
+Libs: -L${prefix}/lib -laruco
+Requires: 

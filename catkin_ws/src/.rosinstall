@@ -1,0 +1,28 @@
+- git:
+    local-name: geometry2
+    uri: https://github.com/ros/geometry2.git
+    version: noetic-devel
+- git:
+    local-name: hector_slam
+    uri: https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
+    version: noetic-devel
+- git:
+    local-name: irob_assignment_1
+    uri: https://github.com/albiLo17/irob_assignment_1.git
+    version: master
+- git:
+    local-name: navigation
+    uri: https://github.com/ros-planning/navigation.git
+    version: noetic-devel
+- git:
+    local-name: navigation_msgs
+    uri: https://github.com/ros-planning/navigation_msgs.git
+    version: ros1
+- git:
+    local-name: turtlebot3
+    uri: https://github.com/ROBOTIS-GIT/turtlebot3.git
+    version: noetic
+- git:
+    local-name: turtlebot3_msgs
+    uri: https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+    version: noetic

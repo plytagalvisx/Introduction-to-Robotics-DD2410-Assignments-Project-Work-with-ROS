@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: imu_sensor_controller
+Description: Description of imu_sensor_controller
+Version: 0.4.9
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/ros_controllers/imu_sensor_controller/include
+Libs: -L${prefix}/lib -limu_sensor_controller
+Requires: controller_interface hardware_interface pluginlib realtime_tools roscpp sensor_msgs

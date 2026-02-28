@@ -1,0 +1,2 @@
+set(dynamic_introspection_MESSAGE_FILES "/home/milenavi/project_ws/src/assignment_5/dynamic_introspection/msg/BoolParameter.msg;/home/milenavi/project_ws/src/assignment_5/dynamic_introspection/msg/IntrospectionMsg.msg;/home/milenavi/project_ws/src/assignment_5/dynamic_introspection/msg/DoubleParameter.msg;/home/milenavi/project_ws/src/assignment_5/dynamic_introspection/msg/IntParameter.msg;/home/milenavi/project_ws/src/assignment_5/dynamic_introspection/msg/MarkerParameter.msg")
+set(dynamic_introspection_SERVICE_FILES "")

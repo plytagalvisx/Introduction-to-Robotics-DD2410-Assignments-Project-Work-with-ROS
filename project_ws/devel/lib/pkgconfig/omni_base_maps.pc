@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: omni_base_maps
+Description: Description of omni_base_maps
+Version: 0.0.11
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

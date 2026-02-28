@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: tiago_pick_demo
+Description: Description of tiago_pick_demo
+Version: 2.0.4
+Cflags: -I/home/milenavi/project_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

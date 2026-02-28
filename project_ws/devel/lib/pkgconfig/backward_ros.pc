@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: backward_ros
+Description: Description of backward_ros
+Version: 0.1.8
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/backward_ros/include
+Libs: -L${prefix}/lib -lbackward
+Requires: 

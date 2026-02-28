@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: joy_teleop
+Description: Description of joy_teleop
+Version: 1000.4.2
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/teleop_tools/joy_teleop/include
+Libs: -L${prefix}/lib 
+Requires: actionlib teleop_tools_msgs

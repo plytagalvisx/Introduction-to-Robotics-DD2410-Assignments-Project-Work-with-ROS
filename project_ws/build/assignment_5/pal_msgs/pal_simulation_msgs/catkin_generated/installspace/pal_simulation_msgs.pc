@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/install
+
+Name: pal_simulation_msgs
+Description: Description of pal_simulation_msgs
+Version: 0.15.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs message_generation

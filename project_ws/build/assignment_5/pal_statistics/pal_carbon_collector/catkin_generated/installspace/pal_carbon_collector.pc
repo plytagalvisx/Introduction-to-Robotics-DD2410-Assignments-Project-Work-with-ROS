@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/install
+
+Name: pal_carbon_collector
+Description: Description of pal_carbon_collector
+Version: 1.5.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

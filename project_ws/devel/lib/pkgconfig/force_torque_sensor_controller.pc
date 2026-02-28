@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: force_torque_sensor_controller
+Description: Description of force_torque_sensor_controller
+Version: 0.4.9
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/ros_controllers/force_torque_sensor_controller/include
+Libs: -L${prefix}/lib -lforce_torque_sensor_controller
+Requires: controller_interface geometry_msgs hardware_interface pluginlib realtime_tools roscpp sensor_msgs

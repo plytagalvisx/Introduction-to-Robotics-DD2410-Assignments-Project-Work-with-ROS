@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/install
+
+Name: tiago_rgbd_sensors
+Description: Description of tiago_rgbd_sensors
+Version: 2.1.18
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

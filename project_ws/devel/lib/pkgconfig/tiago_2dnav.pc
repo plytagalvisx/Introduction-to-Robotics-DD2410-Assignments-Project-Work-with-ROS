@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: tiago_2dnav
+Description: Description of tiago_2dnav
+Version: 2.1.18
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

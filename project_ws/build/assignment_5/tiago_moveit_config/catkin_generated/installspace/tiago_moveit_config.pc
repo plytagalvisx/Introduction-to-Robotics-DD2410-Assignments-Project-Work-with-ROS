@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/install
+
+Name: tiago_moveit_config
+Description: Description of tiago_moveit_config
+Version: 1.2.10
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/milenavi/project_ws/devel
+
+Name: controller_manager_tests
+Description: Description of controller_manager_tests
+Version: 0.5.3
+Cflags: -I/home/milenavi/project_ws/src/assignment_5/ros_control/controller_manager_tests/include
+Libs: -L${prefix}/lib -lcontroller_manager_tests
+Requires: controller_manager controller_interface
