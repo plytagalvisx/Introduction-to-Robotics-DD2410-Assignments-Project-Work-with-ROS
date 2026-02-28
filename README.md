@@ -1,0 +1,2 @@
+# Introduction-to-Robotics-DD2410-Assignments-Project-Work-with-ROS
+This repository contains assignments, and project work from course DD2410 at KTH. The course builds a strong foundation in robotics, combining theory and hands-on implementation, covering kinematics, motion planning, control, perception, localization, mapping, and autonomous navigation, along with creative extensions beyond course requirements.
