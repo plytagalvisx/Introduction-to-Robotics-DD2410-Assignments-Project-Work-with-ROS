@@ -17,7 +17,7 @@ This repository contains assignments and project work from the course **DD2410 �
 ### `catkin_ws`
 ROS workspace containing four laboratory assignments:
 
-- **Assignment 1** – ROS Basics  
+- **Assignment 1** – ROS Basics with TurtleBot3 Burger Robot
 - **Assignments 2–4** – Kinematics, Planning, and Mapping  
 
 ### `project_ws`
