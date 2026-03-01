@@ -111,7 +111,11 @@ This state path is judged on whether it avoided obstacles and made it to the tar
 
 ## Results
 
+Below is a solution for the A\* planner:
+
 ![A* Planner](images/a-star-solution.png "A* Planner")
+
+and a solution for the Theta\* planner:
 
 ![Theta* Planner](images/theta-star-solution.png "Theta* Planner")
 
