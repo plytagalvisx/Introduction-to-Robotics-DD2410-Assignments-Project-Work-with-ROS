@@ -158,8 +158,6 @@ Below in the table you will find an image for each of the four maps. This is how
 
 ![normal-obstacles-table](images/normal-obstacles-table.png "normal-obstacles-table")
 
-![inflated_obs_stage_1](images/inflated_obs_stage_1.png "inflated_obs_stage_1")
-
 The yellow part of the images is occupied space, while the gray part is unknown space.
 
 Yellow = Occupied\
@@ -208,6 +206,8 @@ Use `self.c_space`.
 Below is the table for the inflated obstacles (C-space) maps.
 
 ![inflated-obstacles-table](images/inflated-obstacles-table.png "inflated-obstacles-table")
+
+![inflated_obs_stage_1](images/inflated_obs_stage_1.png "inflated_obs_stage_1")
 
 The yellow part of the images is occupied space, the white free space, gray unknown space, and red C-space.
 
