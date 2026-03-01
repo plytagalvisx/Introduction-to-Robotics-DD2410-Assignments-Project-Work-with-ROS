@@ -45,7 +45,7 @@ class StateMachine(object):
         self.place_pose_topic = rospy.get_param(rospy.get_name() + '/place_pose_topic')
         self.pick_srv_nm = rospy.get_param(rospy.get_name() + "/pick_srv")
         self.place_srv_nm = rospy.get_param(rospy.get_name() + "/place_srv")
-        self.aruco_pose_top = rospy.get_param(rospy.get_name() + '/marker_pose_topic')
+        self.aruco_pose_top = rospy.get_param(rospy.get_name() + '/aruco_pose_topic')
         
         self.pick_pose = None
         self.place_pose = None
@@ -61,8 +61,11 @@ class StateMachine(object):
         # Alternative: subscribe to /gazebo/model_states
         self.cube_pose = None
         self.model_states_sub = rospy.Subscriber("/gazebo/model_states", ModelStates, self.model_states_cb)
-
-        # self.aruco_cube_srv_nm = rospy.get_param(rospy.get_name() + '/marker_pose_topic')
+        
+        # Alternative (Best): use the cube_pose param directly and publish it to the marker_pose_topic before calling the pick service.
+        cube_str = rospy.get_param(rospy.get_name() + '/cube_pose')
+        cube_vals = [float(v) for v in cube_str.split(',')]
+        self.cube_pose_param = cube_vals # contains [x, y, z, qx, qy, qz, qw]
 
         # Wait for service providers
         rospy.wait_for_service(self.mv_head_srv_nm, timeout=30)
@@ -127,72 +130,6 @@ class StateMachine(object):
             i = msg.name.index("aruco_cube")
             self.cube_pose = msg.pose[i]   # geometry_msgs/Pose
 
-    def creep_to_pick_pose(self,
-                        goal_xy_tol=0.10,   # 10 cm
-                        goal_yaw_tol=0.25,  # ~14 degrees
-                        v_max=0.15,         # m/s
-                        w_max=0.6,          # rad/s
-                        timeout_s=15.0):
-        """
-        Drive the base slowly to self.pick_pose using /cmd_vel (no move_base).
-        Assumes self.pick_pose is in the 'map' frame (or at least TF-reachable).
-        """
-        if self.pick_pose is None:
-            rospy.logerr("%s: No pick_pose received.", self.node_name)
-            return False
-
-        rate = rospy.Rate(20)
-        t0 = rospy.Time.now()
-
-        while not rospy.is_shutdown():
-            # timeout
-            if (rospy.Time.now() - t0).to_sec() > timeout_s:
-                self.cmd_vel_pub.publish(Twist())
-                rospy.logerr("%s: creep_to_pick_pose timed out.", self.node_name)
-                return False
-
-            # Transform goal into robot frame so x=forward, y=left
-            try:
-                transform = self.tfBuffer.lookup_transform(
-                    "base_footprint",                  # target frame
-                    self.pick_pose.header.frame_id,    # source frame (usually 'map')
-                    rospy.Time(0),
-                    rospy.Duration(0.2)
-                )
-                goal_in_base = do_transform_pose(self.pick_pose, transform)
-            except (tf2_ros.LookupException, tf2_ros.ExtrapolationException, tf2_ros.ConnectivityException):
-                rate.sleep()
-                continue
-
-            dx = goal_in_base.pose.position.x
-            dy = goal_in_base.pose.position.y
-            dist = math.hypot(dx, dy)
-
-            # yaw error: where the goal is relative to robot forward axis
-            yaw_err = math.atan2(dy, dx)
-
-            # check convergence
-            if dist < goal_xy_tol and abs(yaw_err) < goal_yaw_tol:
-                self.cmd_vel_pub.publish(Twist())
-                rospy.loginfo("%s: Reached pick pose (manual).", self.node_name)
-                return True
-
-            # simple proportional control (clamped)
-            cmd = Twist()
-
-            # rotate more when heading is off
-            cmd.angular.z = max(-w_max, min(w_max, 1.2 * yaw_err))
-
-            # only drive forward/back when roughly facing the goal
-            if abs(yaw_err) < 0.6:  # ~35 deg
-                cmd.linear.x = max(-v_max, min(v_max, 0.6 * dist))
-            else:
-                cmd.linear.x = 0.0
-
-            self.cmd_vel_pub.publish(cmd)
-            rate.sleep()
-
-
     def publish_cube_pose_for_pick(self, cube_pose_in_map):
 
         tfm = self.tfBuffer.lookup_transform(
@@ -214,6 +151,25 @@ class StateMachine(object):
 
         self.cube_pose_pub.publish(cube_in_base)
         rospy.sleep(1.0)  # small delay to ensure it is received
+
+    def publish_cube_pose_from_param(self):
+        cube = PoseStamped()
+        cube.header.stamp = rospy.Time.now()
+        cube.header.frame_id = "base_footprint"   # IMPORTANT
+
+        cube.pose.position.x = self.cube_pose_param[0] + 0.03
+        cube.pose.position.y = self.cube_pose_param[1]
+        cube.pose.position.z = self.cube_pose_param[2]
+
+        cube.pose.orientation.x = self.cube_pose_param[3]
+        cube.pose.orientation.y = self.cube_pose_param[4]
+        cube.pose.orientation.z = self.cube_pose_param[5]
+        cube.pose.orientation.w = self.cube_pose_param[6]
+
+        rospy.loginfo("Publishing cube pose taken directly from launch_project.launch param")
+
+        self.cube_pose_pub.publish(cube)
+        rospy.sleep(1)
         
     def check_states(self):
         
@@ -308,20 +264,25 @@ class StateMachine(object):
             #   - Then call the pick service
             # Call the pick service to pick up the cube:
             if self.state == 1:
-                try:
-                    rospy.loginfo("%s: Pick up", self.node_name)
-                    
-                    cube_pose = self.get_cube_pose("map")
-                    if cube_pose:
-                        cube_msg = PoseStamped()
-                        cube_msg.header.stamp = rospy.Time.now()
-                        cube_msg.header.frame_id = "map"
-                        cube_msg.pose = cube_pose
+                try:                    
+                    # cube_pose = self.get_cube_pose("map")
+                    # if cube_pose:
+                    #     cube_msg = PoseStamped()
+                    #     cube_msg.header.stamp = rospy.Time.now()
+                    #     cube_msg.header.frame_id = "map"
+                    #     cube_msg.pose = cube_pose
                         
-                        self.publish_cube_pose_for_pick(cube_msg)
+                    #     self.publish_cube_pose_for_pick(cube_msg)
                         
                         # self.cube_pose_pub.publish(cube_msg)
-                        rospy.sleep(1.0)  # small delay to ensure it is received
+                        # rospy.sleep(1.0)  # small delay to ensure it is received
+                        
+                    rospy.loginfo("Publishing cube pose (param) before pick")
+                    
+                    self.publish_cube_pose_from_param()
+                    rospy.sleep(1.0)  # small delay to ensure it is received
+                    
+                    rospy.loginfo("%s: Pick up", self.node_name)
 
                     pick_srv = rospy.ServiceProxy(self.pick_srv_nm, SetBool)
                     pick_req = pick_srv(True)
@@ -580,4 +541,3 @@ if __name__ == "__main__":
 		pass
 
 	rospy.spin()
-
