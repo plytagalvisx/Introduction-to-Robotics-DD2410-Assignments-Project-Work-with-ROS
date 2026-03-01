@@ -7,7 +7,7 @@ at KTH.
 The assignment is submitted via **Kattis**:
 https://kth.kattis.com/courses/DD2410/irob23
 
-------------------------------------------------------------------------
+---
 
 ## Overview
 
@@ -17,7 +17,7 @@ different robotic manipulators:
 1.  **3-DOF SCARA Robot** (Analytical IK)
 2.  **7-DOF KUKA Robot** (Numerical / Iterative IK)
 
-------------------------------------------------------------------------
+---
 
 # Repository Structure
 
@@ -30,10 +30,10 @@ You must modify and submit:
 
 This file contains:
 
--   `scara_IK(...)`
--   `kuka_IK(...)`
+- `scara_IK(...)`
+- `kuka_IK(...)`
 
-------------------------------------------------------------------------
+---
 
 # Part 1 -- SCARA Robot (Analytical IK)
 
@@ -44,10 +44,10 @@ SCARA robot.
 
 ### Robot Structure
 
--   q1 → Revolute
--   q2 → Revolute
--   q3 → Prismatic
--   End-effector z-coordinate equals q3
+- q1 → Revolute
+- q2 → Revolute
+- q3 → Prismatic
+- End-effector z-coordinate equals q3
 
 ### Input
 
@@ -59,22 +59,34 @@ SCARA robot.
 
 ### Run SCARA Visualization
 
-``` bash
+```bash
 roslaunch kinematics_assignment scara_launch.launch
 ```
 
+An rviz window will open:
+
+![scara_launch_large](images/scara_launch_large.png "scara_launch_large")
+
+This allows you to visualize the robot and verify that it moves correctly along the desired path once you have implemented the IK solution.
+
+![scara_explanation_large](images/scara_explanation_large.png "scara_explanation_large")
+
+The following image shows the distances between the joints and the end-effector frame, in the robot's zero configuration. Two joints (q1 and q2) are revolute, and one (q3) is prismatic. Notice that the end-effector frame and the base frame are at the same height, which means that the end-effector z coordinate coincides with the value of the last prismatic joint (q3).
+
+![scara_values_large](images/scara_values_large.png "scara_values_large")
+
 If already running:
 
-``` bash
+```bash
 rosservice call /restart
 ```
 
 ### Grading
 
--   Required to pass (E grade)
--   Kattis score ≥ 20
+- Required to pass (E grade)
+- Kattis score ≥ 20
 
-------------------------------------------------------------------------
+---
 
 # Part 2 -- KUKA Robot (Numerical IK)
 
@@ -100,46 +112,72 @@ solution.
 
 ### Run KUKA Visualization
 
-``` bash
+```bash
 roslaunch kinematics_assignment kuka_launch.launch
 ```
 
+An rviz window will open:
+
+![kuka_launch_large](images/kuka_launch_large.png "kuka_launch_large")
+
+![kuka_info_large](images/kuka_info_large.png "kuka_info_large")
+
+This robot has a kinematics structure much more complex than the SCARA, therefore it is not feasible to obtain an analytic solution for the inverse kinematics problem.
+
+To help you write the IK algorithm, this is the DH table of the KUKA robot, with the depicted frames:
+
+![dh_table_large](images/dh_table_large.png "dh_table_large")
+
+![kuka_DH_large](images/kuka_DH_large.png "kuka_DH_large")
+
 Restart path:
 
-``` bash
+```bash
 rosservice call /restart
 ```
 
-------------------------------------------------------------------------
+---
 
 # KUKA DH Parameters
 
 The Denavit-Hartenberg convention used:
 
--   a_i → distance between z\_{i-1} and z_i along x_i
--   α_i → angle between z\_{i-1} and z_i about x_i
--   d_i → distance between x\_{i-1} and x_i along z\_{i-1}
--   θ_i → angle between x\_{i-1} and x_i about z\_{i-1}
+- a_i → distance between z\_{i-1} and z_i along x_i
+- α_i → angle between z\_{i-1} and z_i about x_i
+- d_i → distance between x\_{i-1} and x_i along z\_{i-1}
+- θ_i → angle between x\_{i-1} and x_i about z\_{i-1}
 
 Frame transformation:
 
 T\_{i-1}\^{i} = Trans(z\_{i-1}, d_i) · Rot(z\_{i-1}, θ_i) · Trans(x_i,
 a_i) · Rot(x_i, α_i)
 
-------------------------------------------------------------------------
+---
 
 # Numerical IK Notes
 
--   Use Jacobian-based update
--   Carefully choose convergence threshold
--   Too small → timeout
--   Too large → inaccurate result
--   If it does not converge → check Jacobian and error formulation
+- Use Jacobian-based update
+- Carefully choose convergence threshold
+- Too small → timeout
+- Too large → inaccurate result
+- If it does not converge → check Jacobian and error formulation
 
 Recommended reference: "Jacobian computation", page 111 in standard
-robotics textbooks.
+robotics textbooks: https://link.springer.com/book/10.1007/978-1-84628-642-1.
 
-------------------------------------------------------------------------
+---
+
+## Fun Extension - Results
+
+As a creative extension, I modified the KUKA LWR control node so the end-effector can draw geometric shapes (e.g., circles) in 3D space using an RGB “marker” visualized in RViz.
+
+The trajectory is generated parametrically (e.g., circle in the y–z plane) and executed via inverse kinematics, while a LINE_STRIP marker publishes the live drawing trace. I also extended the trajectory class to support any number of vertices, enabling arbitrary shapes beyond a square.
+
+This allows the robot to trace circles, or any custom shape, with its end-effector in simulation.
+
+![kuka_circle_1](images/kuka_circle_1.png "kuka_circle_1")
+
+![kuka_circle_2](images/kuka_circle_2.png "kuka_circle_2")
 
 # Common Issues (FAQ)
 
@@ -152,7 +190,7 @@ size.
 
 Add to `.bashrc`:
 
-``` bash
+```bash
 echo 'export LC_NUMERIC="en_US.UTF-8"' >> ~/.bashrc
 source ~/.bashrc
 ```
@@ -165,34 +203,36 @@ Debug position control first, then orientation.
 
 "Accepted" only means no crash. - 20+ → E grade passed - 22 → C grade
 
-------------------------------------------------------------------------
+---
 
 # Grading Summary
 
-  Score    Result
-  -------- ------------
-  \< 20    Not Passed
-  20--21   E grade
-  22       C grade
+Score Result
 
-------------------------------------------------------------------------
+---
+
+\< 20 Not Passed
+20--21 E grade
+22 C grade
+
+---
 
 # Requirements
 
--   ROS (Noetic recommended)
--   Python 3
--   NumPy
+- ROS (Noetic recommended)
+- Python 3
+- NumPy
 
-------------------------------------------------------------------------
+---
 
 # Final Notes
 
--   Multiple IK solutions may exist (especially SCARA)
--   Only requirement: end-effector follows desired path
--   Stability and convergence matter more than specific implementation
-    details
+- Multiple IK solutions may exist (especially SCARA)
+- Only requirement: end-effector follows desired path
+- Stability and convergence matter more than specific implementation
+  details
 
-------------------------------------------------------------------------
+---
 
 **Course:** DD2410 -- Introduction to Robotics\
 **Assignment:** Inverse Kinematics\

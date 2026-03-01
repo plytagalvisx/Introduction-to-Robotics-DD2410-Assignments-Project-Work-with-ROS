@@ -6,36 +6,36 @@ Assignment** for the course\
 
 The assignment focuses on **2D Occupancy Grid Mapping** using ROS.
 
-------------------------------------------------------------------------
+---
 
 # Overview
 
 Mapping is a core capability of autonomous robots. In this assignment,
 the robot builds a map of an unknown environment using:
 
--   Robot pose
--   Laser scan measurements
--   Occupancy grid representation
+- Robot pose
+- Laser scan measurements
+- Occupancy grid representation
 
 We implement mapping using ROS messages and process recorded rosbag
 data.
 
-------------------------------------------------------------------------
+---
 
 # Occupancy Grid Mapping
 
 The environment is represented as a 2D grid:
 
--   Each cell represents a fixed area in the world
--   Cells can be:
-    -   Unknown
-    -   Occupied
-    -   Free
-    -   C-space (inflated obstacles, C assignment)
+- Each cell represents a fixed area in the world
+- Cells can be:
+  - Unknown
+  - Occupied
+  - Free
+  - C-space (inflated obstacles, C assignment)
 
 Resolution determines how much area each grid cell covers.
 
-------------------------------------------------------------------------
+---
 
 # ROS Messages Used
 
@@ -61,19 +61,19 @@ Stores the map in row-major order.
 
 Used in C assignment to only publish updated map region.
 
-------------------------------------------------------------------------
+---
 
 # Installation
 
 1.  Download the ROS package into your ROS workspace
 2.  Run:
 
-``` bash
+```bash
 catkin_make
 source devel/setup.bash
 ```
 
-------------------------------------------------------------------------
+---
 
 # Running the Assignment
 
@@ -83,35 +83,35 @@ Open four terminals:
 
 Terminal 1:
 
-``` bash
+```bash
 roscore
 ```
 
 Terminal 2:
 
-``` bash
+```bash
 roslaunch mapping_assignment play.launch
 ```
 
 Terminal 3:
 
-``` bash
+```bash
 rosbag play --clock BAGFILE
 ```
 
 Terminal 4:
 
-``` bash
+```bash
 rosrun mapping_assignment main.py
 ```
 
 NOTE: Restart main.py when restarting rosbag.
 
-------------------------------------------------------------------------
+---
 
 # Alternative: Using Text Files
 
-``` bash
+```bash
 rosrun mapping_assignment main.py FILE
 ```
 
@@ -119,7 +119,7 @@ Maps will be saved to:
 
     mapping_assignment_metapackage/mapping_assignment/maps/FILE/
 
-------------------------------------------------------------------------
+---
 
 # Part 1 -- E Assignment
 
@@ -149,17 +149,25 @@ Do NOT fill in:
 
 Match the provided correct maps for:
 
--   stage_1
--   stage_2
--   stage_3
--   stage_4
+- stage_1
+- stage_2
+- stage_3
+- stage_4
+
+Below in the table you will find an image for each of the four maps. This is how your corresponding map should look if you have done the assignment correctly. You can find images of all correct maps in the folder mapping_assignment_metapackage/mapping_assignment/correct_maps/.
+
+![normal-obstacles-table](images/normal-obstacles-table.png "normal-obstacles-table")
+
+![inflated_obs_stage_1](images/inflated_obs_stage_1.png "inflated_obs_stage_1")
+
+The yellow part of the images is occupied space, while the gray part is unknown space.
 
 Yellow = Occupied\
 Gray = Unknown
 
 Passing this part gives an **E grade**.
 
-------------------------------------------------------------------------
+---
 
 # Part 2 -- C Assignment
 
@@ -170,6 +178,7 @@ Now additionally:
 ```{=html}
 <!-- -->
 ```
+
     raytrace(self, start, end)
 
 Use `self.free_space`.
@@ -181,6 +190,7 @@ Use `self.free_space`.
 ```{=html}
 <!-- -->
 ```
+
     update = OccupancyGridUpdate()
 
 Only publish updated rectangle area.
@@ -190,24 +200,31 @@ Only publish updated rectangle area.
 ```{=html}
 <!-- -->
 ```
+
     inflate_map(self, grid_map)
 
 Use `self.c_space`.
 
+Below is the table for the inflated obstacles (C-space) maps.
+
+![inflated-obstacles-table](images/inflated-obstacles-table.png "inflated-obstacles-table")
+
+The yellow part of the images is occupied space, the white free space, gray unknown space, and red C-space.
+
 ### Map Colors
 
--   Yellow → Occupied
--   White → Free
--   Gray → Unknown
--   Red → C-space (inflated obstacles)
+- Yellow → Occupied
+- White → Free
+- Gray → Unknown
+- Red → C-space (inflated obstacles)
 
-------------------------------------------------------------------------
+---
 
 # Debugging
 
 Check update message:
 
-``` bash
+```bash
 rostopic echo /map_updates
 rostopic echo /map_updates --noarr
 ```
@@ -216,35 +233,35 @@ Verify: - x - y - width - height - data length (1D array)
 
 Order of updates matters --- avoid overwriting incorrect values.
 
-------------------------------------------------------------------------
+---
 
 # Key Concepts
 
--   Coordinate frame transformations
--   Ray tracing
--   Occupancy grid updates
--   Configuration space (C-space)
--   Efficient map publishing
+- Coordinate frame transformations
+- Ray tracing
+- Occupancy grid updates
+- Configuration space (C-space)
+- Efficient map publishing
 
-------------------------------------------------------------------------
+---
 
 # Requirements
 
--   ROS (Noetic recommended)
--   Python 3
--   NumPy
+- ROS (Noetic recommended)
+- Python 3
+- NumPy
 
-------------------------------------------------------------------------
+---
 
 # Final Notes
 
--   Clear free space between robot and obstacle
--   Be careful with index conversion (int only)
--   Only update changed map region for efficiency
--   Test using provided rosbags
--   Compare output with correct maps before submission
+- Clear free space between robot and obstacle
+- Be careful with index conversion (int only)
+- Only update changed map region for efficiency
+- Test using provided rosbags
+- Compare output with correct maps before submission
 
-------------------------------------------------------------------------
+---
 
 **Course:** DD2410 -- Introduction to Robotics\
 **Assignment:** Mapping\
