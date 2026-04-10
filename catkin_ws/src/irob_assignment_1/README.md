@@ -4,6 +4,12 @@
 
 In this course we will be using the Robot Operating System (ROS). ROS is a middleware platform that provides libraries and tools that help software developers create robot applications. It simplifies the integration of different components on the same system and over the network.
 
+## Result
+
+Below we can see the completed environment explored by the Burger robot after running the mini-project for a while. The white area is the free space, the gray area is the unknown space, the cerise colored area is the occupied space, and the cyan colored area is the C-space. The purpose of the mini-project was to explore as much of the unknown space as possible using the exploration and collision avoidance nodes used by the controller node we implemented.
+
+![cleared_map](images/cleared_map.png "cleared_map")
+
 ### Why do we use ROS?
 
 ![ROS community map](images/ros_community.png "ROS community map")
@@ -707,9 +713,3 @@ cd ~
 mkdir not
 mv .nv .nvidia-settings-rc not
 ```
-
-## Result
-
-Below we can see the completed environment explored by the Burger robot after running the mini-project for a while. The white area is the free space, the gray area is the unknown space, the cerise colored area is the occupied space, and the cyan colored area is the C-space. The purpose of the mini-project was to explore as much of the unknown space as possible using the exploration and collision avoidance nodes used by the controller node we implemented.
-
-![cleared_map](images/cleared_map.png "cleared_map")
