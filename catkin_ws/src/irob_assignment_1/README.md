@@ -6,7 +6,7 @@ In this course we will be using the Robot Operating System (ROS). ROS is a middl
 
 ## Result
 
-Below we can see the completed environment explored by the Burger robot after running the mini-project for a while. The white area is the free space, the gray area is the unknown space, the cerise colored area is the occupied space, and the cyan colored area is the C-space. The purpose of the mini-project was to explore as much of the unknown space as possible using the exploration and collision avoidance nodes used by the controller node we implemented.
+Below we can see the completed environment explored by the turtlebot3 Burger robot after running the mini-project for a while. The white area is the free space, the gray area is the unknown space, the cerise colored area is the occupied space, and the cyan colored area is the C-space. The purpose of the mini-project was to explore as much of the unknown space as possible using the exploration and collision avoidance nodes used by the controller node we implemented.
 
 ![cleared_map](images/cleared_map.png "cleared_map")
 
